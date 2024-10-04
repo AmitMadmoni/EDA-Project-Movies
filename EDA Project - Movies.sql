@@ -1,10 +1,31 @@
+CREATE TABLE IF NOT EXISTS public.movies_data
+(
+    movie text ,
+    director text ,
+    running_time integer,
+    actor_1 text,
+    actor_2 text,
+    actor_3 text,
+    genre text,
+    budget bigint,
+    box_office bigint,
+    actors_box_office double precision,
+    director_box_office double precision,
+    earnings bigint,
+    oscar_and_golden_globes_nominations integer,
+    oscar_and_golden_globes_awards integer,
+    release_year integer,
+    imdb_score double precision
+)
+
 select * from movies_data;
 
-COPY movies_data(movie, director, "running time", "actor 1", "actor 2", "actor 3", genre, budget, "box office", "actors box office",
-				"director box office", earnings, nominations, awards, "release year", "imdb score")
+COPY movies_data(movie, director, running_time, actor_1, actor_2, actor_3, genre, budget, box_office, actors_box_office,
+				director_box_office, earnings, oscar_and_golden_globes_nominations, oscar_and_golden_globes_awards, release_year, imdb_score)
 FROM 'D:\Data Analyst\PostgreSQL EDA Project - Movies\movies_data.csv'
 DELIMITER ','
 CSV HEADER;
+
 
 -- Basic queries:
 
