@@ -1,6 +1,8 @@
 # EDA-Project-Movies
 Exploratory Data Analysis Project in PostgreSQL
 
+-- Running instructions below
+
 This dataset, taken from https://www.kaggle.com/datasets/delfinaoliva/movies/data, contains data regarding movies.
 
 The columns in this dataset are:
@@ -23,3 +25,9 @@ In this project, I performed an exploratory data analysis (EDA) on the movie dat
 I utilized CTEs and window functions to generate insightful queries, uncovering trends in genre profitability, conducting comparisons between genres, directors, years, awards ETC.
 
 Attached are the project file and the csv file contains the dataset.
+
+Running instructions:
+1. Download both csv file and SQL file to a specific folder in your computer. 
+2. Run the CREATE TABLE query which creates the 'movies_data' table.
+3. Run the COPY query in order to import the data from the csv file into the table. Make sure to write the correct file location in the FROM clause.
+   
