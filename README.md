@@ -22,7 +22,7 @@ The columns in this dataset are:
 14.	IMDb score - Score out of 10 that is calculated from the votes of registered IMDb users on the movie
 
 In this project, I performed an exploratory data analysis (EDA) on the movie dataset using PostgreSQL.
-I utilized CTEs and window functions to generate insightful queries, uncovering trends in genre profitability, conducting comparisons between genres, directors, years, awards ETC.
+I utilized CTEs and window functions to generate insightful queries, uncovering trends in genre profitability, conducting comparisons between genres, directors, years, awards, etc.
 
 Attached are the project file and the csv file contains the dataset.
 
