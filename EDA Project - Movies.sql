@@ -35,17 +35,20 @@ FROM movies_data
 ORDER BY earnings DESC
 LIMIT 3;
 
+
 -- three least profitable movie
 SELECT movie, earnings
 FROM movies_data
 ORDER BY earnings DESC
 LIMIT 3;
 
+
 -- three most budgeted movies
 SELECT movie, budget
 FROM movies_data
 ORDER BY budget
 LIMIT 3;
+
 
 -- three most profitable directors
 SELECT director, SUM(earnings) total_earnings
@@ -54,6 +57,7 @@ GROUP BY director
 ORDER BY total_earnings DESC
 LIMIT 3;
 
+
 -- three least profitable directors
 SELECT director, SUM(earnings) total_earnings
 FROM movies_data
@@ -61,11 +65,13 @@ GROUP BY director
 ORDER BY total_earnings
 LIMIT 3;
 
+
 -- ten longest movies and their earnings
 SELECT movie, running_time, earnings
 FROM movies_data
 ORDER BY running_time DESC
 LIMIT 10;
+
 
 -- total movies, budgets, earnings, awards and average runtime per genre
 SELECT genre, COUNT(*) total_movies, SUM(budget) total_budgets, SUM(earnings) total_earnings,
@@ -74,12 +80,14 @@ FROM movies_data
 GROUP BY genre
 ORDER BY total_earnings DESC;
 
+
 -- ratio between nominations and awards per genre
 SELECT genre, ROUND(cast(SUM(oscar_and_golden_globes_awards) as decimal)/SUM(oscar_and_golden_globes_nominations), 3) ratio
 FROM movies_data
 GROUP BY genre
 HAVING SUM(oscar_and_golden_globes_nominations) > 0
 ORDER BY ratio DESC;
+
 
 -- ratio between nominations and awards per director
 SELECT director, SUM(oscar_and_golden_globes_awards) total_awards, 
@@ -88,6 +96,7 @@ FROM movies_data
 GROUP BY director
 HAVING SUM(oscar_and_golden_globes_nominations) > 0
 ORDER BY total_awards DESC;
+
 
 -- comparing between total budgets, total box offices and total earnings through the years
 SELECT release_year, SUM(budget) total_budgets, SUM(box_office) total_box_offices,
@@ -103,11 +112,13 @@ FROM movies_data
 GROUP BY director
 ORDER BY directorials DESC;
 
+
 -- awards-winning movies, with negative profit
 SELECT movie, oscar_and_golden_globes_awards, imdb_score, earnings
 FROM movies_data
 WHERE oscar_and_golden_globes_awards > 0 AND earnings < 0
 ORDER BY oscar_and_golden_globes_awards desc, earnings;
+
 
 -- awards-less movies with the highest imdb score
 SELECT movie, oscar_and_golden_globes_awards, imdb_score, earnings
@@ -115,10 +126,19 @@ FROM movies_data
 WHERE oscar_and_golden_globes_awards = 0
 ORDER BY imdb_score DESC;
 
+
 -- comparison between imdb score and earnings
 SELECT movie, imdb_score, earnings
 FROM movies_data
 ORDER BY imdb_score DESC;
+
+
+-- number of movies and total budgets in each year
+SELECT release_year, COUNT(*) total_movies, SUM(budget) total_budgets
+FROM movies_data
+GROUP BY release_year
+ORDER BY release_year;
+
 
 -- Complex queries:
 
@@ -139,6 +159,7 @@ FROM actors_list
 GROUP BY actor
 ORDER BY total_appearances DESC;
 
+
 -- rolling total of earnings of directors over the years
 WITH tmp AS
 (
@@ -150,6 +171,7 @@ SELECT director, release_year, SUM(earnings) OVER(PARTITION BY director ORDER BY
 FROM tmp
 WHERE director IN (SELECT director FROM movies_data GROUP BY director HAVING COUNT(*) > 10);
 
+
 -- rolling total of earnings of genres over the years
 WITH tmp AS
 (
@@ -160,11 +182,6 @@ WITH tmp AS
 SELECT genre, release_year, SUM(earnings) OVER(PARTITION BY genre ORDER BY release_year) cumulative_earnings
 FROM tmp;
 
--- number of movies and total budgets in each year
-SELECT release_year, COUNT(*) total_movies, SUM(budget) total_budgets
-FROM movies_data
-GROUP BY release_year
-ORDER BY release_year;
 
 -- five most profitable movies each year
 WITH ranked_table AS
@@ -176,6 +193,7 @@ SELECT movie, release_year, earnings
 FROM ranked_table
 WHERE rank_tmp <= 5
 ORDER BY release_year, earnings DESC;
+
 
 -- three most profitable genres each year
 with genre_yearly_earning as
